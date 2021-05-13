@@ -25,7 +25,7 @@ public class CategoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("Categories");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //bir önceki ekrana dönebilme durumunu aktif hale getirme
 
         catGrid = findViewById(R.id.catGridview);
 

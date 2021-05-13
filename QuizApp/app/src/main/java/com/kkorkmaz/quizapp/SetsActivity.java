@@ -19,7 +19,7 @@ public class SetsActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.set_toolbar);
         setSupportActionBar(toolbar);
-        String title = getIntent().getStringExtra("CATEGORY");
+        String title = getIntent().getStringExtra("CATEGORY"); //başlığı kategoriden çekiyor
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
