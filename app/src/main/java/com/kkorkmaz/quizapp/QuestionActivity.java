@@ -70,7 +70,7 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
 
 
     private void setQuestion(){
-        timer.setText(String.valueOf(10));
+        timer.setText(String.valueOf(10)); //zaman olarak 10sn
 
         question.setText(questionList.get(0).getQuestion());
         option1.setText(questionList.get(0).getOptionA());
@@ -88,7 +88,7 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
 
         private void startTimer(){
 
-         countDown = new CountDownTimer(12000,1000) {
+         countDown = new CountDownTimer(12000,1000) { //geri sayım saati //coun
             @Override
             public void onTick(long millisUntilFinished) {
                 if(millisUntilFinished < 10000)
@@ -111,10 +111,10 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
 
 
     @Override
-    public void onClick(View v) { //implement edilen onClicklistener ın methodunu kullanıyoruz.
+    public void onClick(View v) { //implement edilen onClicklistener ın methodunu kullanıyoruz.//cevapları tıkladığımızda
 
         int selectedOption = 0;
-
+//birden fazla option olduğu için herbir değişkene farklı durum yazılabileceğinden switch case kullandım
         switch(v.getId()){
             case R.id.option1 :
                 selectedOption = 1 ;
@@ -142,10 +142,11 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
 
     private void checkAnswer(int selectedOption, View view){
 
-        if(selectedOption == questionList.get(quesNum).getCorrectAns()){
+        if(selectedOption == questionList.get(quesNum).getCorrectAns()){ //seçilen buton questionliste tanımladığımız cevaplardan gelen sorularla eşleşiyorsa
 
             //doğru cevap
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { //BackgroundTintList kullanabilmek için
+
                 ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
 
                 score++;
@@ -157,6 +158,7 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
             //yanlış cevap
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
                 ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.RED));
 
                 switch (questionList.get(quesNum).getCorrectAns())
@@ -186,7 +188,7 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
             public void run() {
                 changeQuestion();
             }
-        },2000);
+        },2000); // 2 saniye bekle ve yeni soru getir
 
 
     }
@@ -258,6 +260,7 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
 
                                     //if(viewNum != 0)
                                         //((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E99")));
+
 
 
 

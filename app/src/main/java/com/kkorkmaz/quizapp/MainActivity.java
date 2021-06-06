@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText username, password, repassword;
     Button btnSignUp,btnSignIn;
+
     DBHelper myDB;
 
     @Override
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         btnSignUp = (Button)findViewById(R.id.btnSignUp);
         btnSignIn = (Button)findViewById(R.id.btnSignIn);
 
-        myDB = new DBHelper(this);
+        myDB = new DBHelper(this); //DBhelper classını kullanmak için
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
                 String repass = repassword.getText().toString();
 
                 if(user.equals("") || pass.equals("") || repass.equals("")){
-                    Toast.makeText(MainActivity.this, "Fill alt the fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
 
-                    if(pass.equals(repass)){
+                    if(pass.equals(repass)){ //password ve repassword uyuşuyor mu? parola uyuştu peki sora
                        Boolean usercheckResult =  myDB.checkusername(user);
-                       if(usercheckResult == false){
+                       if(usercheckResult == false){ //kullanıcım varsa toast use already
 
-                       Boolean regResult =  myDB.insertData(user,pass);
+                       Boolean regResult =  myDB.insertData(user,pass); //kullanıcı ekleme işlemi
                          if(regResult == true){
                              Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                              Intent intent = new Intent(getApplicationContext(),LoginActivity.class);

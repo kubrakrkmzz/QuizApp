@@ -28,7 +28,7 @@ public class ScoreActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScoreActivity.this,SplashActivity.class);
+                Intent intent = new Intent(ScoreActivity.this,CategoryActivity.class);
                 ScoreActivity.this.startActivity(intent);
                 ScoreActivity.this.finish();
             }

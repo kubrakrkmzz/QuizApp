@@ -87,7 +87,7 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="Password"
-
+                android:inputType="textPassword"
                 android:padding="10dp"
                 android:textSize="18sp" />
             <EditText
@@ -96,10 +96,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
-                android:drawableLeft="@drawable/email"
+                android:drawableLeft="@drawable/key"
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="Renter Password"
+                android:inputType="textPassword"
                 android:padding="10dp"
                 android:textAllCaps="true"
                 android:textSize="18sp" />

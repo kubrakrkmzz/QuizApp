@@ -1,11 +1,11 @@
 package com.kkorkmaz.quizapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.GridView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class SetsActivity extends AppCompatActivity {
@@ -26,7 +26,7 @@ public class SetsActivity extends AppCompatActivity {
         sets_grid = findViewById(R.id.sets_gridview);
 
 
-        SetsAdapter adapter = new SetsAdapter(6);
+        SetsAdapter adapter = new SetsAdapter(3);
         sets_grid.setAdapter(adapter);
 
     }

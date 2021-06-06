@@ -25,11 +25,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public  Boolean insertData(String username, String password){
         SQLiteDatabase myDB = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
+        ContentValues contentValues = new ContentValues(); //ContentValues.put ile eklenecek veriler tanımlanır
         contentValues.put("username",username);
         contentValues.put("password",password);
-        long result = myDB.insert("users",null,contentValues);
-        if(result == -1){
+        long result = myDB.insert("users",null,contentValues); //bundan sonra değeri saklamalıyız
+        if(result == -1){ //başarılı olursa true değerini döndürür başarısız olursa -1 değer atar ve result içinde saklanır
             return false;
         }
         else{
@@ -37,10 +37,13 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    //veritabanına ekleme işlemlerimiz bitti şimdi kullanacağımız fonksiyonlarla kullanılıcılarımızın olup olmadığının kontrolünü yapıyoruz
+
     public  Boolean checkusername(String username){
         SQLiteDatabase myDB = this.getWritableDatabase();
         Cursor cursor = myDB.rawQuery("select * from users where username = ?", new String [] {username});
-        if(cursor.getCount()>0){
+
+        if(cursor.getCount()>0){ //kullanıcımız varsa true dönder
 
             return true;
         }
@@ -54,7 +57,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase myDB = this.getWritableDatabase();
         Cursor cursor = myDB.rawQuery("select * from users where username = ? and password = ? ", new String [] {username, password});
 
-        if(cursor.getCount()>0){
+        if(cursor.getCount()>0){ //kullanıcının şifresi kullanıcı adıyla uyuyorsa true dönder
             return true;
         }
         else{
