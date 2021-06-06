@@ -12,11 +12,22 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.kkorkmaz.quizapp.SetsActivity.category_id;
 
 public class QuestionActivity extends AppCompatActivity implements  View.OnClickListener{
 
@@ -26,6 +37,8 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
     private int quesNum;
     private CountDownTimer countDown;
     private int score;
+    private FirebaseFirestore firestore;
+    private int setNo;
 
 
 
@@ -49,6 +62,9 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
         option3.setOnClickListener(this);
         option4.setOnClickListener(this);
 
+        setNo = getIntent().getIntExtra("SETNO",1);
+        firestore = FirebaseFirestore.getInstance();
+
         getQuestionsList();
         score = 0;
 
@@ -59,11 +75,35 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
     private void getQuestionsList(){
         questionList = new ArrayList<>();
 
-        questionList.add(new Question("Question 1","A","B","C","D",2));
-        questionList.add(new Question("Question 2","B","B","D","A",2));
-        questionList.add(new Question("Question 3","C","B","A","D",2));
-        questionList.add(new Question("Question 4","A","D","C","B",2));
-        questionList.add(new Question("Question 5","C","D","A","D",2));
+        firestore.collection("QUIZ").document("CAT" +String.valueOf(category_id))
+                .collection("SET" + String.valueOf(setNo))
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful())
+                {
+                   QuerySnapshot questions = task.getResult();
+
+                    for(QueryDocumentSnapshot doc : questions){
+                        questionList.add(new Question(doc.getString("QUESTION"),
+                                doc.getString("A"),
+                                doc.getString("B"),
+                                doc.getString("C"),
+                                doc.getString("D"),
+                                Integer.valueOf(doc.getString("ANSWER"))
+                        ));
+                    }
+
+                }
+                else
+                {
+
+                    Toast.makeText(QuestionActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
 
         setQuestion();
     }
@@ -259,7 +299,7 @@ public class QuestionActivity extends AppCompatActivity implements  View.OnClick
                                     //doğru veya yanlış seçilen butonların renklerinin diğer sorulara geçmesini engelleme ve kendi rengine dönme
 
                                     //if(viewNum != 0)
-                                        //((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E99")));
+                                    //((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E99")));
 
 
 
